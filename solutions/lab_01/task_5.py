@@ -1,24 +1,22 @@
 researcher_name = input("Имя исследователя:\n> ")
 experiment_name = input("Название эксперимента:\n> ")
-total_run_count = int(
-    input("Количество выполненных запусков (целое число):\n> ")
-)
+total_run_count = int(input("Количество выполненных запусков (целое число):\n> "))
 single_run_duration = float(
     input("Длительность одного запуска в секундах (вещественное число):\n> ")
 )
 complex_coefficient = complex(
     float(
-        input("Действительная часть комплексного коэффициента (вещественное число):\n> ")
+        input(
+            "Действительная часть комплексного коэффициента (вещественное число):\n> "
+        )
     ),
-    float(
-        input("Мнимая часть комплексного коэффициента (вещественное число):\n> ")
-    ),
+    float(input("Мнимая часть комплексного коэффициента (вещественное число):\n> ")),
 )
 
 has_runs = total_run_count > 0
 total_run_duration = total_run_count * single_run_duration
 total_run_duration_minutes = total_run_duration / 60
-modulus_square = complex_coefficient.real ** 2 + complex_coefficient.imag ** 2
+modulus_square = complex_coefficient.real**2 + complex_coefficient.imag**2
 
 print(
     f"""

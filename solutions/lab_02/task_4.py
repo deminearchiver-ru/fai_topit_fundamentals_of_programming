@@ -1,5 +1,6 @@
 import gc
 
+
 def experiment_cycle_lists() -> None:
     print("=== Часть 1. Цикл из двух списков и параметры GC ===")
     print("Автоматический сборщик мусора включен (gc.isenabled()):", gc.isenabled())
@@ -33,7 +34,11 @@ def experiment_cycle_lists() -> None:
 
     # 3. Запустите gc.collect() и сохраните возвращенное значение
     collected_count = gc.collect()
-    print("Количество собранных объектов после del first, second и gc.collect():", collected_count)
+    print(
+        "Количество собранных объектов после del first, second и gc.collect():",
+        collected_count,
+    )
+
 
 def experiment_disabled_gc() -> None:
     print("\n=== Часть 2. Дополнительный эксперимент с временным отключением GC ===")
@@ -50,15 +55,21 @@ def experiment_disabled_gc() -> None:
             del a
             del b
 
-        print("Счетчики поколений до ручного gc.collect() (gc.get_count()):", gc.get_count())
+        print(
+            "Счетчики поколений до ручного gc.collect() (gc.get_count()):",
+            gc.get_count(),
+        )
         collected_manual = gc.collect()
         print("Собрано объектов при ручном вызове gc.collect():", collected_manual)
     finally:
         gc.enable()
         print("GC восстановлен (gc.isenabled()):", gc.isenabled())
 
+
 def practical_task_graph() -> None:
-    print("\n=== Практическая задача. Модель графа с циклом из трех узлов и независимым узлом ===")
+    print(
+        "\n=== Практическая задача. Модель графа с циклом из трех узлов и независимым узлом ==="
+    )
     # Предварительная сборка мусора и замер до создания графа
     baseline_collected = gc.collect()
     print("Собрано объектов до создания графа (базовый замер):", baseline_collected)
@@ -93,7 +104,10 @@ def practical_task_graph() -> None:
 
         # Выполняем ручную сборку мусора
         after_graph_collected = gc.collect()
-        print("\nСобрано объектов после удаления внешних имен A, B, C и вызова gc.collect():", after_graph_collected)
+        print(
+            "\nСобрано объектов после удаления внешних имен A, B, C и вызова gc.collect():",
+            after_graph_collected,
+        )
         print(
             f"Сравнение: до создания графа = {baseline_collected}, "
             f"после удаления циклических узлов = {after_graph_collected} "
@@ -105,6 +119,7 @@ def practical_task_graph() -> None:
         print("Независимый узел остается доступен:", node_d)
     finally:
         gc.enable()
+
 
 if __name__ == "__main__":
     experiment_cycle_lists()

@@ -1,5 +1,6 @@
 import copy
 
+
 def print_structures_state(
     stage_title: str,
     original: list,
@@ -30,6 +31,7 @@ def print_structures_state(
             f"первая оценка ({struct[0][1]}): {first_grade_id}"
         )
     print()
+
 
 def experiment_copying() -> None:
     original = [
@@ -69,6 +71,7 @@ def experiment_copying() -> None:
         deep,
     )
 
+
 def experiment_matrices() -> None:
     print("=== Исследование создания матрицы ===")
 
@@ -76,7 +79,9 @@ def experiment_matrices() -> None:
     wrong_matrix = [[0] * 3] * 3
     wrong_matrix[0][0] = 1
 
-    print("Ошибочная матрица (wrong_matrix = [[0] * 3] * 3 после wrong_matrix[0][0] = 1):")
+    print(
+        "Ошибочная матрица (wrong_matrix = [[0] * 3] * 3 после wrong_matrix[0][0] = 1):"
+    )
     print("    Значение:", wrong_matrix)
     print(
         "    id строк:",
@@ -93,7 +98,9 @@ def experiment_matrices() -> None:
     correct_matrix = [[0] * 3 for _ in range(3)]
     correct_matrix[0][0] = 1
 
-    print("\nКорректная матрица (correct_matrix = [[0] * 3 for _ in range(3)] после correct_matrix[0][0] = 1):")
+    print(
+        "\nКорректная матрица (correct_matrix = [[0] * 3 for _ in range(3)] после correct_matrix[0][0] = 1):"
+    )
     print("    Значение:", correct_matrix)
     print(
         "    id строк:",
@@ -107,6 +114,7 @@ def experiment_matrices() -> None:
         and (correct_matrix[1] is not correct_matrix[2])
         and (correct_matrix[0] is not correct_matrix[2]),
     )
+
 
 if __name__ == "__main__":
     experiment_copying()

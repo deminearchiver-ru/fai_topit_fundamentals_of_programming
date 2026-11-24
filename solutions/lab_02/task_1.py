@@ -117,9 +117,15 @@ def practical_task() -> None:
 
     print("\nИтог проверки независимости (assert пройдены успешно):")
     print(f"- Внешний словарь общий?              {config_prod is config_independent}")
-    print(f"- Список участников общий?            {config_prod['members'] is config_independent['members']}")
-    print(f"- Список параметров запуска общий?    {config_prod['launch_params'] is config_independent['launch_params']}")
-    print(f"- Вложенный список параметров общий?  {config_prod['launch_params'][1] is config_independent['launch_params'][1]}")
+    print(
+        f"- Список участников общий?            {config_prod['members'] is config_independent['members']}"
+    )
+    print(
+        f"- Список параметров запуска общий?    {config_prod['launch_params'] is config_independent['launch_params']}"
+    )
+    print(
+        f"- Вложенный список параметров общий?  {config_prod['launch_params'][1] is config_independent['launch_params'][1]}"
+    )
 
 
 if __name__ == "__main__":

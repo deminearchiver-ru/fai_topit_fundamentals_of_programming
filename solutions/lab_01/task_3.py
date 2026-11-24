@@ -1,5 +1,6 @@
 import math
 
+
 def experiment_a():
     print("Experiment A")
     x = 17
@@ -13,30 +14,30 @@ def experiment_a():
         "x / y": x / y,
         "x // y": x // y,
         "x % y": x % y,
-        "x ** y": x ** y,
+        "x ** y": x**y,
     }
     results_display = list(
         zip(
             results.keys(),
             results.values(),
-            (str(result) for result in results.values())
+            (str(result) for result in results.values()),
         )
     )
     max_expression_width = max(len(expression) for expression, _, _ in results_display)
     max_display_width = max(len(display) for _, _, display in results_display)
     for expression, result, display in results_display:
         print(
-            f"{
-                expression.ljust(max_expression_width)
-            } = {
+            f"{expression.ljust(max_expression_width)} = {
                 display.ljust(max_display_width)
             } ({type(result).__name__})"
         )
 
+
 def experiment_b():
     print("Experiment B")
-    result = 2 ** 1000
+    result = 2**1000
     print(f"result = {result} ({type(result).__name__})")
+
 
 def experiment_c():
     print("Experiment C")
@@ -51,30 +52,29 @@ def experiment_c():
         zip(
             results.keys(),
             results.values(),
-            (str(result) for result in results.values())
+            (str(result) for result in results.values()),
         )
     )
     max_expression_width = max(len(expression) for expression, _, _ in results_display)
     max_display_width = max(len(display) for _, _, display in results_display)
     for expression, result, display in results_display:
         print(
-            f"{
-                expression.ljust(max_expression_width)
-            } = {
+            f"{expression.ljust(max_expression_width)} = {
                 display.ljust(max_display_width)
             } ({type(result).__name__})"
         )
 
+
 def experiment_d():
     print("Experiment D")
     results = {
-        "int(\"42\")": int("42"),
-        "float(\"3.14\")": float("3.14"),
+        'int("42")': int("42"),
+        'float("3.14")': float("3.14"),
         "str(2026)": str(2026),
         "bool(0)": bool(0),
         "bool(-1)": bool(-1),
-        "bool("")": bool(""),
-        "bool(\"False\")": bool("False"),
+        "bool()": bool(""),
+        'bool("False")': bool("False"),
         "complex(2, -3)": complex(2, -3),
         "complex(2, -3).real": complex(2, -3).real,
         "complex(2, -3).imag": complex(2, -3).imag,
@@ -83,19 +83,18 @@ def experiment_d():
         zip(
             results.keys(),
             results.values(),
-            (str(result) for result in results.values())
+            (str(result) for result in results.values()),
         )
     )
     max_expression_width = max(len(expression) for expression, _, _ in results_display)
     max_display_width = max(len(display) for _, _, display in results_display)
     for expression, result, display in results_display:
         print(
-            f"{
-                expression.ljust(max_expression_width)
-            } = {
+            f"{expression.ljust(max_expression_width)} = {
                 display.ljust(max_display_width)
             } ({type(result).__name__})"
         )
+
 
 experiment_a()
 print()

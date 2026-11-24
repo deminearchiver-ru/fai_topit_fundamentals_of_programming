@@ -9,7 +9,7 @@ print(f"2.1. Имя:     {student[0:4]}")
 print(f"2.2. Фамилия: {student[5:]}")
 print(f"3.1. Строка в верхнем регистре: {student.upper()}")
 print(f"3.2. Строка в нижнем регистре:  {student.lower()}")
-print(f"4. Инициалы: {student[0] + "." + student[5] + "."}")
+print(f"4. Инициалы: {student[0] + '.' + student[5] + '.'}")
 print(f"5. Название курса в обратном порядке: {course[::-1]}")
 
 percentage = (completed / total) * 100
@@ -25,7 +25,9 @@ result_old = "%s — %s: %d/%d (%.1f%%)" % (
 print(f"6.1. Оператор %:     {result_old}")
 
 # Форматирование функцией format().
-result_format = "{} — {}: {}/{} ({:.1f}%)".format(student, course, completed, total, percentage)
+result_format = "{} — {}: {}/{} ({:.1f}%)".format(
+    student, course, completed, total, percentage
+)
 print(f"6.2. Метод format(): {result_format}")
 
 # Форматирование при помощи f-строки.

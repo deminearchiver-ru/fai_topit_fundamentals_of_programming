@@ -2,6 +2,7 @@ from dataclasses import dataclass
 import sys
 import tracemalloc
 
+
 @dataclass
 class ObjectSizeRecord:
     label: str
@@ -9,10 +10,12 @@ class ObjectSizeRecord:
     length: int | None
     size_bytes: int
 
+
 @dataclass
 class ListGrowthStep:
     length: int
     size_bytes: int
+
 
 @dataclass
 class TracemallocScenarioResult:
@@ -22,12 +25,14 @@ class TracemallocScenarioResult:
     current_kb: float
     peak_kb: float
 
+
 @dataclass
 class MemoryReportData:
     object_sizes: list[ObjectSizeRecord]
     growth_steps: list[ListGrowthStep]
     scenarios: list[TracemallocScenarioResult]
     peak_ratio: float
+
 
 def measure_object_sizes() -> list[ObjectSizeRecord]:
     empty_list: list[int] = []
@@ -58,6 +63,7 @@ def measure_object_sizes() -> list[ObjectSizeRecord]:
         )
     return records
 
+
 def measure_list_growth(limit: int = 100) -> list[ListGrowthStep]:
     dynamic_list: list[int] = []
     previous_size = sys.getsizeof(dynamic_list)
@@ -67,10 +73,13 @@ def measure_list_growth(limit: int = 100) -> list[ListGrowthStep]:
         dynamic_list.append(item)
         current_size = sys.getsizeof(dynamic_list)
         if current_size != previous_size:
-            steps.append(ListGrowthStep(length=len(dynamic_list), size_bytes=current_size))
+            steps.append(
+                ListGrowthStep(length=len(dynamic_list), size_bytes=current_size)
+            )
             previous_size = current_size
 
     return steps
+
 
 def measure_list_range_scenario(count: int = 100_000) -> TracemallocScenarioResult:
     tracemalloc.start()
@@ -87,6 +96,7 @@ def measure_list_range_scenario(count: int = 100_000) -> TracemallocScenarioResu
         peak_kb=peak_bytes / 1024,
     )
 
+
 def measure_range_scenario(count: int = 100_000) -> TracemallocScenarioResult:
     tracemalloc.start()
     numbers = range(count)
@@ -101,6 +111,7 @@ def measure_range_scenario(count: int = 100_000) -> TracemallocScenarioResult:
         current_kb=current_bytes / 1024,
         peak_kb=peak_bytes / 1024,
     )
+
 
 def collect_all_measurements() -> MemoryReportData:
     object_sizes = measure_object_sizes()
@@ -121,6 +132,7 @@ def collect_all_measurements() -> MemoryReportData:
         peak_ratio=peak_ratio,
     )
 
+
 def print_memory_report(data: MemoryReportData) -> None:
     print("=== Часть 1. Размер отдельных объектов (sys.getsizeof) ===")
     label_width = max(len(r.label) for r in data.object_sizes)
@@ -136,9 +148,13 @@ def print_memory_report(data: MemoryReportData) -> None:
 
     print("\n=== Часть 2. Динамический рост списка при добавлении 100 элементов ===")
     for step in data.growth_steps:
-        print(f"    Длина: {step.length:>3} -> Размер списка: {step.size_bytes:>4} байт")
+        print(
+            f"    Длина: {step.length:>3} -> Размер списка: {step.size_bytes:>4} байт"
+        )
 
-    print("\n=== Часть 3 и Практическая задача. Сравнение сценариев через tracemalloc ===")
+    print(
+        "\n=== Часть 3 и Практическая задача. Сравнение сценариев через tracemalloc ==="
+    )
     header = (
         f"    {'Сценарий':<22} | {'Элементов':>10} | "
         f"{'Внешний объект (Б)':>18} | {'Текущая память (КБ)':>19} | {'Пиковая память (КБ)':>19}"
@@ -155,6 +171,7 @@ def print_memory_report(data: MemoryReportData) -> None:
         f"\nОтношение пикового объема памяти ({data.scenarios[0].name} / {data.scenarios[1].name}): "
         f"{data.peak_ratio:.2f}x"
     )
+
 
 if __name__ == "__main__":
     report_data = collect_all_measurements()

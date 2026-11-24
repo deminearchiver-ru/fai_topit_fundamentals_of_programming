@@ -1,12 +1,14 @@
 import sys
 import weakref
 
+
 class Record:
     def __init__(self, name: str = "unnamed") -> None:
         self.name = name
 
     def __repr__(self) -> str:
         return f"Record(name={self.name!r})"
+
 
 def experiment_refcount() -> None:
     print("=== Часть 1. Изменение счетчика ссылок (sys.getrefcount) ===")
@@ -30,6 +32,7 @@ def experiment_refcount() -> None:
     # Ожидание: 2 (data + временная ссылка)
     print("После очистки контейнера:", sys.getrefcount(data))
 
+
 def experiment_weakref() -> None:
     print("\n=== Часть 2. Эксперимент со слабой ссылкой (weakref.ref) ===")
     record = Record("single")
@@ -41,8 +44,11 @@ def experiment_weakref() -> None:
     # Ожидание: None, так как единственная сильная ссылка удалена и объект уничтожен
     print("После del record:", weak_record())
 
+
 def practical_task_weak_registry() -> None:
-    print("\n=== Практическая задача. Реестр объектов на основе WeakValueDictionary ===")
+    print(
+        "\n=== Практическая задача. Реестр объектов на основе WeakValueDictionary ==="
+    )
     registry: weakref.WeakValueDictionary[str, Record] = weakref.WeakValueDictionary()
 
     # Сохраняем сильные ссылки на первые два объекта, а для третьего — временную ссылку
@@ -71,7 +77,10 @@ def practical_task_weak_registry() -> None:
 
     assert list(registry.keys()) == ["first"]
     assert registry["first"] is rec_1
-    print("\nИтог: WeakValueDictionary автоматически удаляет записи, когда на объекты не остается сильных ссылок.")
+    print(
+        "\nИтог: WeakValueDictionary автоматически удаляет записи, когда на объекты не остается сильных ссылок."
+    )
+
 
 if __name__ == "__main__":
     experiment_refcount()
